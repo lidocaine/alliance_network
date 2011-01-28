@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AllianceNetwork</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <title><%= title %></title>
   <%= csrf_meta_tag %>
+  
+  <%= render 'layouts/stylesheets' %>
+  <%= javascript_include_tag :defaults %>
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <h1 class="prepend-top">The Alliance Network</h1>
+  <hr />
+  <h4><%= render 'limited_nav' %></h3>
+  <hr />
+  <%= yield %>
+
+  <%= debug(params) if Rails.env.development? %>
+</div>
 
 </body>
 </html>
