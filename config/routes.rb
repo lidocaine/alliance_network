@@ -1,5 +1,7 @@
 AllianceNetwork::Application.routes.draw do
   
+  get "users/new"
+
   match "/about", :to => "pages#about"
   root :to => "pages#home"
 
