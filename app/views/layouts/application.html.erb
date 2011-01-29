@@ -10,13 +10,20 @@
 <body>
 
 <div class="container">
-  <h1 class="prepend-top">The Alliance Network</h1>
-  <hr />
-  <h4><%= render 'limited_nav' %></h3>
-  <hr />
-  <%= yield %>
-
-  <%= debug(params) if Rails.env.development? %>
+  <%= render 'layouts/header' %>
+  
+  <div class="span-22 push-1">
+    <section>
+      <%= yield %>
+    </section>
+  </div>
+  
+  <% if Rails.env.development? %>
+    <div class="span-24 last">
+      <%= debug(params) %>
+    </div>
+  <% end %>
+  
 </div>
 
 </body>

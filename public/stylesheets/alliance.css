@@ -1,0 +1,64 @@
+/* Layout Elements */
+
+body {
+	background-color: #e9e9e9;
+}
+
+hr {
+  background-color: #000000;
+}
+
+/* Navigation */
+div.header {
+  text-align: right; 
+  text-transform: lowercase;
+}
+
+div.header h1 {
+  color: #29c;
+}
+
+div.nav {
+  background-color: #29c;
+  padding: 15px 0px 16px 0px;
+  margin: -15px 0px -16px 0px;
+}
+
+ul.nav {
+  list-style: none;
+  padding: 0px;
+}
+
+ul.nav, ul.nav li {
+  display: inline;
+}
+
+ul.nav li {
+  text-transform: uppercase;
+  border-right: 4px solid #e9e9e9;
+  padding: 15px 0px 17px 0px;
+  margin: -15px 0px -17px 0px;
+}
+
+ul.nav li.first {
+  margin-left: 4px;
+}
+
+ul.nav li a,
+ul.nav li a:visited {
+  text-decoration: none;
+  color: #FFF;
+  border-right: 30px solid #000;
+  border-left: 30px solid #000;
+  border-top: 15px solid #000;
+  border-bottom: 17px solid #000;
+  background-color: #000;
+}
+
+ul.nav li a:hover {
+  background-color: #333;
+  border-right: 30px solid #333;
+  border-left: 30px solid #333;
+  border-top: 15px solid #333;
+  border-bottom: 17px solid #333;
+}
