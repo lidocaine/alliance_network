@@ -1,8 +1,9 @@
 AllianceNetwork::Application.routes.draw do
-  
-  get "users/new"
+  resources :users
 
   match "/about", :to => "pages#about"
+  match "/register", :to => "users#new"
+  
   root :to => "pages#home"
 
   # The priority is based upon order of creation:
