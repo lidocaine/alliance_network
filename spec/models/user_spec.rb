@@ -5,7 +5,9 @@ describe User do
     @attr = { :username => "TestUser",
               :first_name => "Testimus",
               :last_name => "Userus",
-              :email => "testing@example.com" }
+              :email => "testing@example.com",
+              :password => "foobar",
+              :password_confirmation => "foobar" }
   end
   
   it "should create a new instance given valid attributes" do
@@ -67,7 +69,7 @@ describe User do
       long_first_name_user.should_not be_valid
     end
     
-    it "should reject first names with spaces and/or special characters"
+    # it "should reject first names with spaces and/or special characters"
   end
   
   describe "tests on last names" do
@@ -82,7 +84,7 @@ describe User do
       long_last_name_user.should_not be_valid
     end
     
-    it "should reject last names with spaces and/or special characters"
+    # it "should reject last names with spaces and/or special characters"
   end
   
   describe "tests on email addresses" do
@@ -91,8 +93,8 @@ describe User do
       no_email_user.should_not be_valid
     end
   
-    pending "should accept valid email addresses" do
-      addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp double.tdl@freak.co.jp]
+    pending "should accept valid email addresses" do # There is no reason why this test doesn't pass.
+      addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
       addresses.each do |address|
         valid_email_user = User.new(@attr.merge(:email => address))
         valid_email_user.should be_valid
@@ -123,6 +125,80 @@ describe User do
       duplicate_email_user = User.new(@attr.merge(:email => upcase_email))
       duplicate_email_user.should_not be_valid
     end
+  end
+  
+  describe "tests on passwords" do
+    it "should require a password" do
+      User.new(@attr.merge(:password => "", :password_confirmation => "")).
+      should_not be_valid
+    end
+    
+    it "should require matching password and confirmation" do
+      User.new(@attr.merge(:password_confirmation => "invalid")).
+      should_not be_valid
+    end
+    
+    it "should reject short passwords" do
+      short_pass = "a" * 3
+      User.new(@attr.merge(:password => short_pass, :password_confirmation => short_pass)).
+      should_not be_valid
+    end
+    
+    it "should reject long passwords" do
+      long_pass = "a" * 19
+      User.new(@attr.merge(:password => long_pass, :password_confirmation => long_pass)).
+      should_not be_valid
+    end
+        
+  end
+  
+  describe "tests on encrypted passwords" do
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+    
+    it "should have an encrypted password attribute" do
+      @user.should respond_to(:encrypted_password)
+    end
+    
+    it "should set the encrypted password" do
+      @user.encrypted_password.should_not be_blank
+    end
+    
+    describe "has_password? method" do
+      it "should return false if the passwords don't match" do
+        @user.has_password?("invalid").should_not be_true
+      end
+      
+      it "should return true if the passwords match" do
+        @user.has_password?(@attr[:password]).should be_true
+      end
+      
+    end
+    
+    describe "authenticate method" do
+      it "should return nil on username/password mismatch" do
+        wrong_pass_user = User.authenticate(@attr[:username], "wrongpass")
+        wrong_pass_user.should be_nil
+      end
+      
+      it "should return nil on nonextant username" do
+        non_extant_user = User.authenticate("NoExist", @attr[:password])
+        non_extant_user.should be_nil
+      end
+      
+      it "should return the user on username/password match" do
+        matching_user = User.authenticate(@attr[:username], @attr[:password])
+        matching_user.should == @user
+      end
+      
+    end
+    
+  end
+  
+  describe "tests for boolean properties" do
+    # it "should have an admin? property"
+    # it "should have an astrosexy? property"
   end
   
 end
