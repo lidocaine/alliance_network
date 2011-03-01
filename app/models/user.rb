@@ -14,6 +14,7 @@
 #  salt               :string(255)
 #
 
+require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :username, :first_name, :last_name, :email, :password, :password_confirmation

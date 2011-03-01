@@ -7,5 +7,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @title = "#{@user.username}'s Profile"
   end
+  
+  def new
+    @title = "Sign up"
+    @user = User.new
+  end
 
 end
