@@ -1,2 +1,9 @@
-<h1>Users#new</h1>
-<p>This is is just a placeholder message, bitches!</p>
+<h1>Register</h1>
+
+<%= form_for(@user) do |f|%>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <%= render 'fields', :f => f %>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
