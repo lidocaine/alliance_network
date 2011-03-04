@@ -12,14 +12,15 @@
 <div class="container">
   <%= render 'layouts/header' %>
   
-  <div class="span-24 last">
+  <div class="span-24 last" style="margin-top: 25px">
     <section>
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, :class => "flash #{key}") %>
+        <br />
       <% end %>
     </section>
   </div>
-
+  <br />
   <div class="span-22 push-1">
         <section>
       <%= yield %>

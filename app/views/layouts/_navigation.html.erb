@@ -1,13 +1,17 @@
-<div class="nav">
-  <ul class="nav">
+<ul class="nav">
+  <% if signed_in? %>
+    <li class="first"><%= link_to "Dashboard", '#', :class => "quiet" %></li>
+  <% else %>
     <li class="first"><%= link_to "Home", root_path, :class => "quiet" %></li>
-    <li><%= link_to "About", about_path, :class => "quiet" %></li>
-    <% if signed_in? %>
+  <% end %>
+  
+  <li><%= link_to "About", about_path, :class => "quiet" %></li>
+  
+  <% if signed_in? %>
     <li><%= link_to "Members", users_path, :class => "quiet" %></li>
     <li><%= link_to "Logout", signout_path, :class => "quiet" %></li>
-    <% else %>
+  <% else %>
     <li><%= link_to "Register", register_path, :class => "quiet" %></li>
     <li><%= link_to "Sign In", signin_path, :class => "quiet" %></li>
-    <% end %>
-  </ul>
-</div>
+  <% end %>
+</ul>
