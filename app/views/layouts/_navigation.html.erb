@@ -2,7 +2,12 @@
   <ul class="nav">
     <li class="first"><%= link_to "Home", root_path, :class => "quiet" %></li>
     <li><%= link_to "About", about_path, :class => "quiet" %></li>
+    <% if signed_in? %>
+    <li><%= link_to "Members", users_path, :class => "quiet" %></li>
+    <li><%= link_to "Logout", signout_path, :class => "quiet" %></li>
+    <% else %>
     <li><%= link_to "Register", register_path, :class => "quiet" %></li>
-    <li><%= link_to "Sign In", "#", :class => "quiet" %></li>
+    <li><%= link_to "Sign In", signin_path, :class => "quiet" %></li>
+    <% end %>
   </ul>
 </div>

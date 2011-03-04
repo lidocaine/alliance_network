@@ -20,14 +20,16 @@ describe User do
       no_uname_user.should_not be_valid
     end
   
-    it "should reject short usernames" do
-      short_uname = "a" * 2
-      short_uname_user = User.new(@attr.merge(:username => short_uname))
-      short_uname_user.should_not be_valid
-    end
+    # Changed model validations to max length 30
+    #
+    # it "should reject short usernames" do
+    #   short_uname = "a" * 2
+    #   short_uname_user = User.new(@attr.merge(:username => short_uname))
+    #   short_uname_user.should_not be_valid
+    # end
     
     it "should reject long usernames" do
-      long_uname = "a" * 26
+      long_uname = "a" * 31
       long_uname_user = User.new(@attr.merge(:username => long_uname))
       long_uname_user.should_not be_valid
     end
