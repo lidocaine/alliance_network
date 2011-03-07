@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
   
+  def dashboard
+    @title = "Dashboard"
+  end
+  
   def new
     @title = "Register"
     @user = User.new

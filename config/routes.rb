@@ -7,6 +7,7 @@ AllianceNetwork::Application.routes.draw do
   match '/signout',   :to => 'sessions#destroy'
 
   match '/about',     :to => 'pages#about'
+  match '/dashboard', :to => 'users#dashboard'
   
   root :to => "pages#home"
 

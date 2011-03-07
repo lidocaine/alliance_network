@@ -1,6 +1,6 @@
 <ul class="nav">
   <% if signed_in? %>
-    <li class="first"><%= link_to "Dashboard", '#', :class => "quiet" %></li>
+    <li class="first"><%= link_to "Dashboard", dashboard_path, :class => "quiet" %></li>
   <% else %>
     <li class="first"><%= link_to "Home", root_path, :class => "quiet" %></li>
   <% end %>
