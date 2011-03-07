@@ -7,6 +7,7 @@ gem 'rails', '3.0.3'
 
 gem 'mysql2'
 gem 'gravatar_image_tag'
+gem 'omniauth'
 # gem 'will_paginate', '~> 3.0.pre2'
 
 # Use unicorn as the web server
