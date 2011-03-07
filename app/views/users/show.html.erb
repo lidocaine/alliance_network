@@ -10,5 +10,18 @@
 
 <p>
   <span class="loud">Name: </span><%= @user.first_name %> <%= @user.last_name %><br />
-  <span class="loud">Email: </span><%= @user.email %>
+  <span class="loud">Email: </span><%= @user.email %><br />
+  <span class="loud">Status: </span><%= @user.status %>
 </p>
+
+<% if current_user?(@user) %>
+  <%= render 'shared/micropost_form' %>
+<% end %>
+
+<table summary="Posts by <%= @user.username %>">
+  <% if @user.microposts.empty? %>
+  <tr><td>No Status Updates Found</td></tr>
+  <% else %>
+    <%= render 'status_feed' %>
+  <% end %>
+</table>

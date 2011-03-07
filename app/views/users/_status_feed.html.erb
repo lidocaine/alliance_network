@@ -1,0 +1,18 @@
+<% unless @status_feed.empty? %>
+  <% @status_feed.each do |status| %>
+    <tr>
+      <td>
+        <span class="loud"><b><%= status.user.username %></b> </span>
+        <%= status.content %>
+        <span class="quiet"><%= time_ago_in_words(status.created_at) %> ago</span>
+      </td>
+      <% if current_user?(status.user) || current_user.admin? %>
+      <td>
+        <%= link_to "delete", status, :method => :delete,
+                                         :confirm => "Are you sure?",
+                                         :title => status.content %>
+      </td>
+      <% end %>
+    </tr>
+  <% end %>
+<% end %>

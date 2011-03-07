@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110201212836
+# Schema version: 20110307204855
 #
 # Table name: users
 #
@@ -12,12 +12,15 @@
 #  updated_at         :datetime
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  admin              :boolean(1)
 #
 
 require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password, :update_type
   attr_accessible :username, :first_name, :last_name, :email, :password, :password_confirmation
+  
+  has_many :microposts, :dependent => :destroy
   
   username_format = /^[A-Za-z0-9_-]+$/
   
@@ -38,6 +41,20 @@ class User < ActiveRecord::Base
                           :if => :noexist_or_update_password
                                                       
   before_save :encrypt_password, :if => :noexist_or_update_password
+  
+  def feed_status
+    Micropost.where("user_id = ?", id)
+  end
+  
+  def status
+    # If user has no status updates, set status to blank.
+    # Not efficient, but will suffice for now.
+    if last_status.nil?
+      status = ' '
+    else
+      last_status.content
+    end
+  end
   
   def has_password?(submitted_password)
     self.encrypted_password == encrypt(submitted_password)
@@ -64,6 +81,10 @@ class User < ActiveRecord::Base
     # or if the user doesn't already have a password (as is the case when creating a user).
     def noexist_or_update_password
       !self.respond_to?(:encrypted_password) || self.encrypted_password.nil?
+    end
+    
+    def last_status
+      Micropost.where("user_id = ?", id).first
     end
     
     def encrypt_password

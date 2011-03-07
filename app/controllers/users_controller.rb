@@ -6,7 +6,11 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @micropost = Micropost.new
     @title = "#{@user.username}'s Profile"
+    
+    # Loads all of a user's status updates to instance variable
+    @status_feed = current_user.feed_status
   end
   
   def index
