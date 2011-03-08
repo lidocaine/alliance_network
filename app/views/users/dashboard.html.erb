@@ -1,3 +1,8 @@
 <h2>Dashboard</h2>
 <%= avatar_for(current_user) %>
 <p>Welcome <%= current_user.username %>!</p>
+
+<table>
+  <th>Recent Activity</th>
+  <%= render 'status_feed' %>
+</table>

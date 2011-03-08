@@ -8,17 +8,27 @@
     <% end %> )
 <% end %></h2>
 
-<p>
-  <span class="loud">Name: </span><%= @user.first_name %> <%= @user.last_name %><br />
-  <span class="loud">Email: </span><%= @user.email %><br />
-  <span class="loud">Status: </span><%= @user.status %>
-</p>
-
-<% if current_user?(@user) %>
-  <%= render 'shared/micropost_form' %>
-<% end %>
+<table>
+  <tr>
+    <td width="100">
+      <%= avatar_for(@user) %>
+    </td>
+    <td>
+      <p>
+        <span class="loud">Name: </span><%= @user.first_name %> <%= @user.last_name %><br />
+        <span class="loud">Email: </span><%= @user.email %><br />
+        <% unless @user.microposts.empty? %><span class="loud">Status: </span><%= @user.status %><% end %>
+        
+        <% if current_user?(@user) %>
+          <%= render 'shared/micropost_form' %>
+        <% end %>
+      </p>
+    </td>
+  </tr>
+</table>
 
 <table summary="Posts by <%= @user.username %>">
+  <th colspan="2">Update History</th>
   <% if @user.microposts.empty? %>
   <tr><td>No Status Updates Found</td></tr>
   <% else %>

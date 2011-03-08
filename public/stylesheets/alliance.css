@@ -36,3 +36,13 @@ ul.nav li {
 ul.nav li a {
   text-decoration: none;
 }
+
+/* Forms */
+textarea.input_status {
+  height: 25px;
+}
+
+/* Tables */
+th {
+  font-size: 14pt;
+}

@@ -11,6 +11,11 @@ class UsersController < ApplicationController
     
     # Loads all of a user's status updates to instance variable
     @status_feed = current_user.feed_status
+    
+    # Sets the hold location to this page so that when a user updates
+    # his status, they will be returned to this page.
+    # This will be replaced with a better method (most likely AJAX) later
+    hold_location if current_user?(@user)
   end
   
   def index
@@ -20,6 +25,7 @@ class UsersController < ApplicationController
   
   def dashboard
     @title = "Dashboard"
+    @status_feed = Micropost.all
   end
   
   def new
@@ -90,6 +96,11 @@ class UsersController < ApplicationController
 
     def defer
       redirect_to current_user if signed_in?
+    end
+    
+    # Stores the url of the page user is attempting to view within a session variable
+    def hold_location
+      session[:return_to] = request.fullpath
     end
 
 end
