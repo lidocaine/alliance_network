@@ -1,7 +1,9 @@
 AllianceNetwork::Application.routes.draw do
   resources :users
+
   resources :sessions,    :only => [:new, :create, :destroy]
   resources :microposts,  :only => [:create, :destroy]
+  resources :authentications
 
   match '/register',  :to => 'users#new'
   match '/signin',    :to => 'sessions#new'
@@ -9,6 +11,8 @@ AllianceNetwork::Application.routes.draw do
 
   match '/about',     :to => 'pages#about'
   match '/dashboard', :to => 'users#dashboard'
+  
+  match '/auth/:provider/callback' => 'authentications#create'
   
   root :to => "pages#home"
 

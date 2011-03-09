@@ -9,14 +9,31 @@ namespace :db do
 end
 
 def make_users
-  admin = User.create!(:username => "Lidocaine",
-                       :first_name => "MJ",
-                       :last_name => "Watkins",
-                       :email => "mwatkins@whoshotjane.com",
-                       :password => "katenleo",
-                       :password_confirmation => "katenleo")
-  admin.toggle!(:admin)
-  #admin.toggle!(:astrosexy)
+  me = User.create!(:username => "Lidocaine",
+                    :first_name => "MJ",
+                    :last_name => "Watkins",
+                    :email => "c14h22n2o@gmail.com",
+                    :password => "katenleo",
+                    :password_confirmation => "katenleo")
+  me.toggle!(:admin)
+  #me.toggle!(:astrosexy)
+  
+  lauren = User.create!(:username => "KumoNoYume",
+                        :first_name => "Lauren",
+                        :last_name => "Smith",
+                        :email => "kumonoyume@gmail.com",
+                        :password => "spiderdreams",
+                        :password_confirmation => "spiderdreams")
+  lauren.toggle!(:admin)
+  #lauren.toggle!(:astrosexy)
+  
+  darren = User.create!(:username => "Justice272",
+                        :first_name => "Darren",
+                        :last_name => "Mullen",
+                        :email => "dmullenii@hotmail.com",
+                        :password => "toussen",
+                        :password_confirmation => "toussen")
+  
   
   20.times do |n|
     uname = "DemoUser#{n+1}"

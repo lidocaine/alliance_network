@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   attr_accessible :username, :first_name, :last_name, :email, :password, :password_confirmation
   
   has_many :microposts, :dependent => :destroy
+  has_many :authentications
   
   username_format = /^[A-Za-z0-9_-]+$/
   

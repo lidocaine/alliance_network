@@ -1,0 +1,18 @@
+<h1><%= current_user.username %>'s Authentications</h1>
+
+<table>
+    <th>User</th>
+    <th>Provider</th>
+    <th>UID</th>
+    <th>Meta</th>
+  <% @authentications.each do |auth| %>
+  <tr>
+    <td><%= auth.id %></td>
+    <td><%= auth.provider %></td>
+    <td><%= auth.uid %></td>
+    <td><%= link_to "Delete", authentications_path(auth.uid), :method => :delete,
+                                     :confirm => "Are you sure you want to delete this authentication?",
+                                     :title => "Delete #{auth.provider} Authentication" %></td>
+  </tr>
+  <% end %>
+</table>
