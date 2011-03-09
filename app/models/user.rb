@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   attr_accessor :password, :update_type
   attr_accessible :username, :first_name, :last_name, :email, :password, :password_confirmation
   
+  has_many :authentications
+  
   username_format = /^[A-Za-z0-9_-]+$/
   
   # For some reason, this regex won't pass the rspec test, though it works fine accord to Rubular
